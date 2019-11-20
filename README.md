@@ -1,6 +1,6 @@
 # SQLscripts
 A repository for my SQL scripts
 
-This SQL script is a basic outline script for creating two tables: One with NFL Teams and other with NFL Players. 
+These SQL scripts are basic structures for listing NFL players. 
 
-Currently, the NFL TEAMS table has a column for Team Owner
+There might be more to come, and also maybe bigger projects built on top of these basic scripts
