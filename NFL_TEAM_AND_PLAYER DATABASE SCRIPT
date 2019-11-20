@@ -1,0 +1,83 @@
+USE master; 
+GO
+
+-- Create database.
+IF EXISTS ( SELECT name FROM sys.databases WHERE name = 'NFLPlayers' )
+DROP DATABASE NFLPlayers
+GO
+
+CREATE DATABASE NFLPlayers;
+GO
+
+USE NFLPlayers;
+
+/*
+Create the following tables:
+
+	Team
+	Player
+*/
+
+CREATE TABLE Player
+(
+	PlayerID		INT					PRIMARY KEY IDENTITY,
+	PlayerName		NVARCHAR(20)		NOT NULL UNIQUE
+);
+GO
+
+CREATE TABLE Team
+(
+	PlayerID		INT				PRIMARY KEY IDENTITY,
+	TeamName		NVARCHAR(50)	NOT NULL,
+	TeamID			INT,
+	TeamOwner		NVARCHAR(128)
+);
+GO
+
+
+
+-- Create initial data.
+INSERT INTO Player (PlayerName)
+VALUES
+('Tom Brady'), --1
+('Patrick Mahomes'),
+('Drew Brees'), --3
+('Lamar Jackson'), --4
+('Julio Jones'),
+('Julian Edelman'), --6
+('Mark Ingram'),
+('Minkah Fitzpatrick'), --8
+('Kylar Murray'), --9
+('Baker Mayfield'),
+('Odel Beckham Jr'), --11
+('Jarvis Landry'), --12
+('Joel Bitonio'),
+('Todd Gurley'), --14
+('Aaron Rodgers');
+GO
+
+SET IDENTITY_INSERT Team ON
+
+INSERT INTO Team (TeamName, PlayerID, TeamOwner)
+VALUES
+('New England Patriots', 1, 'Robert Kraft'),
+('Kansas City Chiefs', 2, 'Clark Hunt'),
+('Baltimore Ravens', 4, 'Steve Bisciotti'),
+('Atlanta Falcons', 5, 'Arthur Blank'),
+('New England Patriots', 6, 'Robert Kraft'),
+('Baltimore Ravens', 7, 'Steve Bisciotti'),
+('Pittsburgh Steelers', 8, 'Rooney Family'),
+('Arizona Cardinals', 9, 'Michael Bidwill'),
+('Cleveland Browns', 10, 'James Haslam'),
+('Cleveland Browns', 11, 'James Haslam'),
+('Cleveland Browns', 12, 'James Haslam'),
+('Cleveland Browns', 13, 'James Haslam'),
+('Los Angeles Rams', 14, 'Stan Kroenke'),
+('Green Bay Packers', 15, 'Green Bay Packers Inc');
+GO
+
+-- Test with query
+SELECT [Player] = Player.PlayerName, [Team] = Team.TeamName, [Team Owner] = Team.TeamOwner
+FROM Team
+	JOIN Player ON Player.PlayerID = Team.PlayerID
+ORDER BY Player.PlayerName;
