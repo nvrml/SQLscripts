@@ -1,0 +1,72 @@
+USE master;
+GO
+
+-- Create database of each NFL team's starting quarterback\
+IF EXISTS ( SELECT name FROM sys.databases WHERE name = 'StartingQuarterbacks')
+DROP DATABASE StartingQuarterbacks
+GO
+
+CREATE DATABASE StartingQuarterbacks;
+Go
+
+USE StartingQuarterbacks;
+
+/*
+Create the following table:
+
+    QB
+*/
+
+CREATE TABLE QB
+(
+  JerseyNumber        INT           NOT NULL IDENTITY,
+  PlayerName          NVARCHAR(20)  NOT NULL UNIQUE,
+  TeamName            NVARCHAR(20)  NOT NULL
+);
+GO
+
+SET IDENTITY_INSERT QB ON
+
+--Create initial data
+
+INSERT INTO QB (PlayerName, JerseyNumber, TeamName)
+VALUES
+('Tom Brady', 12, 'New England Patriots'),
+('Patrick Mahomes', 15, 'Kansas City Chiefs'),
+('Drew Brees', 9, 'New Orleans Saints'),
+('Baker Mayfield', 6, 'Cleveland Browns'),
+('Lamar Jackson', 8, 'Baltimore Ravens'),
+('Philip Rivers', 17, 'San Diego Chargers'),
+('Derek Carr', 4, 'Oakland Raiders'),
+('Kyler Murray', 1, 'Arizona Cardinals'),
+('Matt Ryan', 2, 'Atlanta Falcons'),
+('Josh Allen', 17, 'Buffalo Bills'),
+('Kyle Allen', 7, 'Carolina Panthers'),
+('Mitchell Trubisky', 10, 'Chicago Bears'),
+('Ryan Finley', 5, 'Cincinatti Bengals'),
+('Dak Prescott', 4, 'Dallas Cowboys'),
+('Brandon Allen', 2, 'Denver Broncos'),
+('Jeff Driskel', 2, 'Detroit Lions'),
+('Aaron Rodgers', 12, 'Green Bay Packers'),
+('Deshaun Watson', 4, 'Houston Texans'),
+('Brian Hoyer', 2, 'Indianapolis Colts'),
+('Gardner Minshew', 15, 'Jacksonville Jaguars'),
+('Jared Goff', 16, 'Los Angeles Rams'),
+('Ryan Fitzpatrick', 14, 'Miami Dolphins'),
+('Kirk Cousins', 8, 'Minnesota Vikings'),
+('Daniel Jones', 8, 'New York Giants'),
+('Sam Darnold', 14, 'New York Jets'),
+('Carson Wentz', 11, 'Philadelphia Eagles'),
+('Mason Rudolph', 2, 'Pittsburgh Steelers'),
+('Jimmy Garoppolo', 10, 'San Francisco 49ers'),
+('Russel Wilson', 3, 'Seattlle Seahawks'),
+('Jameis Winston', 3, 'Tampa Bay Buccaneers'),
+('Ryan Tannehill', 17, 'Tennessee Titans'),
+('Dwayne Haskins', 7, 'Washington Redskins');
+GO
+
+--Test with query
+
+SELECT [QB] = QB.PlayerName, [Jersey Num] = QB.JerseyNumber, [Team] = QB.TeamName
+FROM QB
+ORDER BY QB.PlayerName;
